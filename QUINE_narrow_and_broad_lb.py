@@ -41,6 +41,16 @@ for i in range(4):
 
 print(c)
 
+state = np.zeros((2**9))
+state[0] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[2 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+
+
 lb_cost_array = [r[0] * A_cost_array[i] + r[1] * B_cost_array[i] + r[3] * (BR_cost_array[i] - AR_cost_array[i]) for i in range(len(time_array))]
 lb_array = [r[0] * A_array[i] + r[1] * B_array[i] + r[3] * (BR_array[i] - AR_array[i]) for i in range(len(time_array))]
 
