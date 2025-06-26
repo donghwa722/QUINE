@@ -29,9 +29,11 @@ Detailed descriptions of each script are provided below.
    - Estimate the tight and loose upper bound.
    - The results are recorded as `data/both_ub.csv`.
 
+---
+
 6. `make_fig.py`
    - For a given `.csv` file, make a figure
    - The figure is saved in the `fig` folder.
-7. make_fig_both.py
+7. `make_fig_both.py`
    - For a given `both_ub.csv` file, make a figure
    - The figure is saved in the `fig` folder.
