@@ -5,6 +5,7 @@ import scienceplots
 import scipy.stats
 import scipy.special
 import numpy as np
+import pandas as pd
 
 plt.rcParams.update({
     "font.family": "serif",   # specify font family here
@@ -29,10 +30,32 @@ time_array, B_cost_array, B_array = QUINE.quine_2(1, num_layers, EPR, 3, 150, [0
 time_array, BR_cost_array, BR_array = QUINE.quine_2(2, num_layers, GHZ, 4, 150, [1, 3])
 time_array, AR_cost_array, AR_array = QUINE.quine_2(2, num_layers, GHZ, 4, 150, [0, 3])
 
-c1, c2, c3, c4 = 0.1, 0.2, 0.3, 0.4
+c = np.random.normal(-1, 1, (4))
+c /= np.linalg.norm(c)
 
-lb_cost_array = [c1 * A_cost_array[i] + c3 * B_cost_array[i] + c4 * (BR_cost_array[i] - AR_cost_array[i]) for i in range(len(time_array))]
-lb_array = [c1 * A_array[i] + c3 * B_array[i] + c4 * (BR_array[i] - AR_array[i]) for i in range(len(time_array))]
+r = np.zeros(4)
+r[0] = c[0] * c[0]
+r[1] = c[1] * c[1]
+r[2] = c[2] * c[2]
+for i in range(4):
+    r[3] += - c[i] * c[i] * np.log2(c[i] * c[i])
+
+print(c)
+
+state = np.zeros((2**9))
+state[0] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[2 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+state[1 + 1 * (2**6)] = c[0] / np.sqrt(2)
+
+
+lb_cost_array = [r[0] * A_cost_array[i] + r[1] * B_cost_array[i] + r[3] * (BR_cost_array[i] - AR_cost_array[i]) for i in range(len(time_array))]
+lb_array = [r[0] * A_array[i] + r[1] * B_array[i] + r[3] * (BR_array[i] - AR_array[i]) for i in range(len(time_array))]
+
+
 
 plt.rc('axes', labelsize=13) 
 plt.rc('legend', fontsize=13) 

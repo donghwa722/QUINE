@@ -4,7 +4,7 @@ import pennylane as qml
 import numpy as np
 import torch
 
-def quine(num_qubits, num_layers, U, U_qubits, steps, wires):
+def quine(num_qubits, num_layers, U, U_qubits, steps, wires, c):
 
     def layer(params, j):
         for i in range(num_qubits):
@@ -40,8 +40,6 @@ def quine(num_qubits, num_layers, U, U_qubits, steps, wires):
     def exact_entropy():
         qml.QubitUnitary(U, wires=range(U_qubits))
         return qml.vn_entropy(wires=wires)
-
-    c = 1.0
 
     def cost_f(T_params, U_params):
         cost = 0
@@ -88,7 +86,7 @@ def quine(num_qubits, num_layers, U, U_qubits, steps, wires):
     return time_array, cost_array, entropy_array
 
 
-def quine_2(num_qubits, num_layers, psi, psi_qubits, steps, wires):
+def quine_2(num_qubits, num_layers, psi, psi_qubits, steps, wires, c):
 
     print(psi)
 
@@ -126,8 +124,6 @@ def quine_2(num_qubits, num_layers, psi, psi_qubits, steps, wires):
     def exact_entropy():
         qml.StatePrep(psi, wires=range(psi_qubits))
         return qml.vn_entropy(wires=wires)
-
-    c = 1.0
 
     def cost_f(T_params, U_params):
         cost = 0
