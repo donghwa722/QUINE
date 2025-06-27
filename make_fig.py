@@ -18,8 +18,8 @@ plt.rc('legend', fontsize=13)
 
 df = pd.read_csv('data/tight_lb.csv')
 
-plt.plot(df['Iteration'], df['Estimation'], color='b', label='Estimation', linewidth = 1)
-plt.plot(df['Iteration'], df['Exact'], linestyle='--', color='r', label='Exact bound', linewidth = 1)
+plt.plot(df['Iteration'], df['Estimation'], color='b', label='Estimation', linewidth = 1, marker='x', markersize=4, markevery=5)
+plt.plot(df['Iteration'], df['Exact'], linestyle='--', color='r', label='Exact bound', linewidth = 1, marker='^', markersize=4, markevery=5)
 
 err = []
 c = (df['Estimation'][0] - df['Exact'][0])
