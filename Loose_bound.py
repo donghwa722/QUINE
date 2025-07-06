@@ -13,23 +13,23 @@ plt.rcParams.update({
     "font.size":11})  
 plt.style.use('science')
 
-A_qubits = 4
-B_qubits = 4
+A_qubits = 3
+B_qubits = 3
 
 num_qubits = A_qubits + B_qubits
 
 #select target density matrix
-U_qubits = 10
+U_qubits = 8
 U = quantum_info.random_unitary(2**(U_qubits)).data
-
-num_layers = 25
 
 is_ub = False
 
 if is_ub:
-    time_array, cost_array, array = QUINE.quine(num_qubits, num_layers, U, U_qubits, 400, range(num_qubits), 1.0)
+    num_layers = 70
+    time_array, cost_array, array = QUINE.quine(num_qubits, num_layers, U, U_qubits, 500, range(num_qubits), 2.0)
 
 else:
+    num_layers = 25
     time_array_1, A_cost_array, A_entropy_array = QUINE.quine(A_qubits, num_layers, U, U_qubits, 250, range(0, A_qubits), 1.0)
     
     U_qubits = 10
@@ -48,7 +48,7 @@ df = pd.DataFrame({
     'Exact' : array
 })
 
-df.to_csv('data/loose_lb_8.csv')
+df.to_csv('data/loose_lb_6_2.csv')
 
 #plt.figure(figsize=(8, 4))
 
